@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <header class="bg-blue-600 text-white py-4 shadow-md text-center">
+  <header class="bg-blue-600 text-white p-4 h-100 shadow-md text-center">
     <slot />
   </header>
 </template>

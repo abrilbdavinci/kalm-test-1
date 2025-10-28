@@ -5,7 +5,14 @@ export default {
 </script>
 
 <template>
-  <footer class="bg-gray-800 text-white py-4 mt-8 text-center">
+  <footer
+    class="text-white py-7 mt-8 text-center w-full"
+    :style="{
+      backgroundColor: '#306067',
+      borderTopLeftRadius: '25px',
+      borderTopRightRadius: '25px'
+    }"
+  >
     <slot />
   </footer>
 </template>

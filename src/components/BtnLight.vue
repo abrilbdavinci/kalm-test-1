@@ -1,13 +1,14 @@
-<script>
-export default {
-  name: 'BtnLight'
-}
-</script>
-
 <template>
   <button
-    class="border border-teal-500 text-teal-500 bg-transparent px-4 py-2 rounded-md hover:bg-teal-50 transition"
+    class="px-5 py-2 border rounded-full transition"
+    :style="{ borderColor: '#306067', color: '#306067' }"
   >
     <slot />
   </button>
 </template>
+
+<script>
+export default {
+  name: 'BtnLight',
+}
+</script>
