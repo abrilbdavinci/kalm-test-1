@@ -6,7 +6,7 @@ export default {
 
 <template>
   <button
-    class="bg-teal-500 text-white px-5 py-2 rounded-full"
+    class="bg-[#37A0AF] text-white px-5 py-2 rounded-full"
   >
     <slot />
   </button>

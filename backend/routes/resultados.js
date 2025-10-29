@@ -1,54 +1,52 @@
-import express from 'express';
-import Resultado from '../models/Resultado.js';
+import express from "express";
+import Resultado from "../models/Resultado.js";
+import Test from "../models/Test.js";
+import Usuario from "../models/User.js";
 
 const router = express.Router();
 
-// Guardar resultado
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const { test, titulo, usuario, respuestas, puntaje } = req.body;
+    console.log("📩 req.body recibido:", req.body); // 👀 veremos qué llega
 
-    // Validación simple
-    if (!test || !titulo || !usuario || !respuestas || puntaje == null) {
-      return res.status(400).json({ error: 'Faltan datos obligatorios' });
+    const { test, usuario, respuestas } = req.body;
+
+    if (!test || !usuario || !Array.isArray(respuestas) || respuestas.length === 0) {
+      return res.status(400).json({ error: "Faltan datos obligatorios" });
     }
+
+    const testExistente = await Test.findById(test);
+    const usuarioExistente = await Usuario.findById(usuario);
+
+    if (!testExistente) return res.status(404).json({ error: "Test no encontrado" });
+    if (!usuarioExistente) return res.status(404).json({ error: "Usuario no encontrado" });
+
+    const conteo = {};
+    respuestas.forEach(r => {
+      conteo[r.scoreKey] = (conteo[r.scoreKey] || 0) + 1;
+    });
+    const resultadoFinal = Object.keys(conteo).reduce((a, b) =>
+      conteo[a] > conteo[b] ? a : b
+    );
 
     const nuevoResultado = new Resultado({
       test,
-      titulo,
       usuario,
       respuestas,
-      puntaje
+      resultadoFinal,
+      fecha: new Date()
     });
 
-    const saved = await nuevoResultado.save();
-    res.status(201).json(saved);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error al guardar resultado' });
-  }
-});
+    const guardado = await nuevoResultado.save();
 
-// Obtener resultado por ID
-router.get('/:id', async (req, res) => {
-  try {
-    const resultado = await Resultado.findById(req.params.id);
-    if (!resultado) return res.status(404).json({ error: 'Resultado no encontrado' });
-    res.json(resultado);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error al obtener resultado' });
-  }
-});
+    res.status(201).json({
+      mensaje: "Resultado guardado exitosamente",
+      resultado: guardado
+    });
 
-// Obtener resultados de un usuario
-router.get('/usuario/:usuario', async (req, res) => {
-  try {
-    const resultados = await Resultado.find({ usuario: req.params.usuario }).sort({ fecha: -1 });
-    res.json(resultados);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error al obtener resultados' });
+  } catch (error) {
+    console.error("❌ Error al guardar resultado:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
   }
 });
 

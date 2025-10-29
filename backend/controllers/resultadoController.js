@@ -3,19 +3,26 @@ import Resultado from "../models/Resultado.js";
 // Guardar resultado de test
 export const guardarResultado = async (req, res) => {
   try {
-    const { testId, tipo, titulo, usuario, respuestas, puntaje } = req.body;
+    let { test, usuario, respuestas, resultadoFinal } = req.body;
 
-    if (!testId || !tipo || !titulo || !usuario || !respuestas || puntaje == null) {
+    // Validar campos obligatorios
+    if (!test || !usuario || !respuestas || !resultadoFinal) {
       return res.status(400).json({ error: 'Faltan datos obligatorios' });
     }
 
+    // Convertir IDs a ObjectId
+    test = mongoose.Types.ObjectId(test);
+    usuario = mongoose.Types.ObjectId(usuario);
+    respuestas = respuestas.map(r => ({
+      pregunta: mongoose.Types.ObjectId(r.pregunta),
+      scoreKey: r.scoreKey
+    }));
+
     const nuevoResultado = new Resultado({
-      testId,
-      tipo,
-      titulo,
+      test,
       usuario,
       respuestas,
-      puntaje
+      resultadoFinal
     });
 
     const saved = await nuevoResultado.save();
@@ -27,11 +34,11 @@ export const guardarResultado = async (req, res) => {
   }
 };
 
-// Obtener resultados de un usuario por tipo de test
+// Obtener resultados de un usuario
 export const obtenerResultadosUsuario = async (req, res) => {
   try {
-    const { usuario, tipo } = req.params;
-    const resultados = await Resultado.find({ usuario, tipo }).sort({ fecha: -1 });
+    const { usuario } = req.params;
+    const resultados = await Resultado.find({ usuario }).sort({ fecha: -1 });
     res.json(resultados);
   } catch (err) {
     console.error(err);

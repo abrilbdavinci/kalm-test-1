@@ -66,20 +66,23 @@ app.use("/", routes);
 
 // Rutas específicas para resultados de tests
 app.use("/resultados", resultadoRoutes);
-app.post('/resultados', async (req, res) => {
+app.post("/resultados", async (req, res) => {
   try {
     const { test, usuario, titulo, respuestas, puntaje } = req.body;
 
     if (!test || !usuario || !titulo || !respuestas || puntaje === undefined) {
-      return res.status(400).json({ error: 'Faltan datos obligatorios' });
+      return res.status(400).json({ error: "Faltan datos obligatorios" });
     }
 
     const nuevoResultado = new Resultado({
-      test,
-      usuario,
-      titulo,
-      respuestas,
-      puntaje
+      test: req.body.test, // string permitido, Mongoose lo convierte
+      titulo: req.body.titulo,
+      usuario: req.body.usuario, // string permitido
+      respuestas: selectedOptions.value.map((r, i) => ({
+        pregunta: test.value.questions[i].key, // o id real de la pregunta
+        scoreKey: r.scoreKey,
+      })),
+      puntaje: req.body.puntaje,
     });
 
     await nuevoResultado.save();
@@ -89,7 +92,6 @@ app.post('/resultados', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 app.use("/tests", testRoutes);
 
