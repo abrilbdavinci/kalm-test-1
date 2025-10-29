@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from "../views/Home.vue";
+import Tests from "../views/Tests.vue";
+import TestDetail from '../views/TestDetail.vue'; // nueva vist
 
 const routes = [
   { path: "/", component: Home },
+  { path: "/tests", component: Tests },
+  { path: '/tests/:id', component: TestDetail, props: true }
 ];
 
 const router = createRouter({

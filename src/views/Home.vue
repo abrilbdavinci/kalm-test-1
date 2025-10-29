@@ -36,7 +36,7 @@ export default {
 
         <!-- Botón -->
         <RouterLink to="/tests">
-            <BtnDark class="w-45 h-15 py-2 px-3 font-bold">Hacer el Test</BtnDark>
+            <BtnDark class="text-2xl w-55 font-bold">Hacer el Test</BtnDark>
         </RouterLink>
 
     </div>

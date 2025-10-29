@@ -26,7 +26,7 @@ export default {
     <!-- Centro: Links -->
     <div class="flex flex-1 justify-center space-x-6">
       <RouterLink to="/" class="transition hover:text-teal-400" style="color: #306067;">Inicio</RouterLink>
-      <RouterLink to="tests" class="transition hover:text-teal-400" style="color: #306067;">Tests</RouterLink>
+      <RouterLink to="/tests" class="transition hover:text-teal-400" style="color: #306067;">Tests</RouterLink>
       <RouterLink to="/planes" class="transition hover:text-teal-400" style="color: #306067;">Planes</RouterLink>
       <RouterLink to="/about" class="transition hover:text-teal-400" style="color: #306067;">Sobre Kälm</RouterLink>
       <RouterLink to="/contacto" class="transition hover:text-teal-400" style="color: #306067;">Contacto</RouterLink>

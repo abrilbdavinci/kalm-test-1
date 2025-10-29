@@ -6,7 +6,7 @@ export default {
 
 <template>
   <footer
-    class="text-white py-7 mt-8 text-center w-full"
+    class="text-white py-5 text-center w-full"
     :style="{
       backgroundColor: '#306067',
       borderTopLeftRadius: '25px',

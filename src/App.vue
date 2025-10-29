@@ -15,13 +15,13 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen header-bg pt-35">
+  <div class="flex flex-col min-h-screen header-bg pt-25">
     <Navbar />
     
 
     
 
-    <main class="flex grow container mx-auto px-4 py-8 text-center">
+    <main class="flex grow container mx-auto px-4 py-8 text-center justify-center">
       
       <RouterView />
     </main>

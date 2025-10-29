@@ -1,7 +1,7 @@
 <template>
   <button
     class="px-5 py-2 border rounded-full transition"
-    :style="{ borderColor: '#306067', color: '#306067' }"
+    :style="{ borderColor: '#306067', backgroundColor: '#E6F4F7FF', color: '#306067' }"
   >
     <slot />
   </button>
