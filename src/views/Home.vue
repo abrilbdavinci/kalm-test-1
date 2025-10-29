@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-    <div class="flex flex-col items-center gap-6 mx-auto">
+    <div class="flex flex-col items-center py-6 gap-6 mx-auto">
 
         <!-- Títulos -->
         <div class="flex flex-col items-center gap-4 text-center">

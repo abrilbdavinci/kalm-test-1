@@ -2,10 +2,11 @@
 import TestCard from '../components/TestCard.vue'
 import BtnDark from '../components/BtnDark.vue'
 import MainTitle from '../components/MainTitle.vue'
+import BtnLight from '../components/BtnLight.vue';
 
 export default {
     name: 'Tests',
-    components: { TestCard, BtnDark, MainTitle },
+    components: { TestCard, BtnDark, MainTitle, BtnLight },
     data() {
         return {
             tests: []
@@ -35,7 +36,7 @@ export default {
                 <template #content>{{ test.description }}</template>
                 <template #button>
                     <RouterLink :to="`/tests/${test.key}`">
-                        <BtnDark class="w-50 py-2 font-bold">Iniciar Test</BtnDark>
+                        <BtnLight class="w-50 py-2 font-bold">Iniciar Test</BtnLight>
                     </RouterLink>
 
 
