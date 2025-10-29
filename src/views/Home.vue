@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-    <div class="flex flex-col items-center py-6 gap-6 mx-auto">
+    <div class="w-4xl flex flex-col items-center py-6 gap-6 mx-auto">
 
         <!-- Títulos -->
         <div class="flex flex-col items-center gap-4 text-center">
@@ -28,7 +28,7 @@ export default {
 
         <!-- Imagen de fondo adaptativa -->
         <div
-            class="w-full max-w-4xl h-64 sm:h-80 md:h-100 bg-center bg-cover rounded-xl"
+            class="w-full max-w-3xl h-64 sm:h-80 md:h-100 bg-center bg-cover rounded-xl"
             style="background-image: url('/src/assets/img/mockups1.png');"
         >
             <!-- opcional: contenido encima de la imagen -->

@@ -26,7 +26,7 @@ export default {
 
 <template>
   <nav
-    class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1500px] backdrop-blur-[25px] bg-white/10 rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.1)] px-8 py-4 flex items-center justify-between z-50">
+    class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1500px] backdrop-blur-[25px] bg-white/10 rounded-full shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-3 flex items-center justify-between z-50">
     <div class="flex items-center">
       <MainTitle>Kälm</MainTitle>
     </div>

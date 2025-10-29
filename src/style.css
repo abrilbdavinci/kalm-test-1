@@ -1,7 +1,13 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap');
-@import url('/src/assets/fonts/tropiline/Tropiline-Regular.otf');
-@import url('/src/assets/fonts/tropiline/Tropiline-Regular.otf');
+
+@font-face {
+  font-family: 'Tropiline';
+  src: url('/src/assets/fonts/tropiline/Tropiline-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 body {
   font-family: 'Mulish', sans-serif;

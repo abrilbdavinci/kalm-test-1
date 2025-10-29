@@ -1,6 +1,6 @@
 <template>
   <section class="w-3xl">
-    <MainTitle>Iniciar Sesión</MainTitle>
+    <MainTitle>Iniciar sesión</MainTitle>
     <div class="w-full h-120 mx-auto mt-5 p-10 bg-white/20 backdrop-blur-lg rounded-xl shadow-lg">
       <form @submit.prevent="login" class="flex flex-col gap-3 my-10">
         <label class="text-start">Email</label>
@@ -8,6 +8,7 @@
 
         <label class="text-start">Contraseña</label>
         <input v-model="password" type="password" class="p-2 rounded-full border" required />
+        <RouterLink to="/pswrd-restore" class="text-[#37A0AF] text-start font-bold">Olvidé la contraseña</RouterLink>
 
         <BtnLight type="submit" class="mt-4 w-70 mx-auto">Ingresar</BtnLight>
 

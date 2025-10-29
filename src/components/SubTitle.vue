@@ -6,7 +6,7 @@ export default {
 
 <template>
   <h2
-    :class="['text-3xl md:text-4xl font-extrabold text-center', $attrs.class]"
+    :class="['text-2xl md:text-2xl font-extrabold text-center', $attrs.class]"
     :style="$attrs.style || 'color: #37A0AF;'"
   >
     <slot />
