@@ -1,12 +1,16 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const resultadoSchema = new mongoose.Schema({
-  testId: { type: String, required: true },
+const ResultadoSchema = new mongoose.Schema({
+  test: { type: mongoose.Schema.Types.ObjectId, ref: 'Test', required: true },
   titulo: { type: String, required: true },
-  respuestas: { type: Array, required: true },
+  usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true },
+  respuestas: [
+    {
+      scoreKey: { type: String, required: true }
+    }
+  ],
   puntaje: { type: Number, required: true },
-  fecha: { type: Date, default: Date.now },
-  usuario: { type: String, default: "Invitado" },
+  fecha: { type: Date, default: Date.now }
 });
 
-export default mongoose.model("Resultado", resultadoSchema);
+export default mongoose.model('Resultado', ResultadoSchema);

@@ -3,40 +3,52 @@ import Resultado from '../models/Resultado.js';
 
 const router = express.Router();
 
-// 📩 Crear nuevo resultado
+// Guardar resultado
 router.post('/', async (req, res) => {
   try {
-    const { testId, titulo, respuestas, puntaje, fecha, usuario } = req.body;
+    const { test, titulo, usuario, respuestas, puntaje } = req.body;
 
-    if (!testId || !titulo || !respuestas || puntaje === undefined) {
-      return res.status(400).json({ error: "Faltan campos obligatorios." });
+    // Validación simple
+    if (!test || !titulo || !usuario || !respuestas || puntaje == null) {
+      return res.status(400).json({ error: 'Faltan datos obligatorios' });
     }
 
     const nuevoResultado = new Resultado({
-      testId,
+      test,
       titulo,
-      respuestas,
-      puntaje,
-      fecha: fecha ? new Date(fecha) : new Date(),
       usuario,
+      respuestas,
+      puntaje
     });
 
-    const resultadoGuardado = await nuevoResultado.save();
-    res.status(201).json(resultadoGuardado);
-  } catch (error) {
-    console.error("❌ Error al guardar resultado:", error);
-    res.status(500).json({ error: "Error al guardar el resultado" });
+    const saved = await nuevoResultado.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al guardar resultado' });
   }
 });
 
-// 📄 Obtener todos los resultados
-router.get('/', async (req, res) => {
+// Obtener resultado por ID
+router.get('/:id', async (req, res) => {
   try {
-    const resultados = await Resultado.find().sort({ fecha: -1 });
-    res.status(200).json(resultados);
-  } catch (error) {
-    console.error("❌ Error al obtener resultados:", error);
-    res.status(500).json({ error: "Error al obtener resultados" });
+    const resultado = await Resultado.findById(req.params.id);
+    if (!resultado) return res.status(404).json({ error: 'Resultado no encontrado' });
+    res.json(resultado);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al obtener resultado' });
+  }
+});
+
+// Obtener resultados de un usuario
+router.get('/usuario/:usuario', async (req, res) => {
+  try {
+    const resultados = await Resultado.find({ usuario: req.params.usuario }).sort({ fecha: -1 });
+    res.json(resultados);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al obtener resultados' });
   }
 });
 
