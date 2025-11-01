@@ -13,7 +13,7 @@ export default {
 
 <template>
     <div
-        class="bg-white/20 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col justify-between h-full w-full max-w-xl">
+        class="bg-white/40 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col justify-between h-full w-full max-w-xl">
 
         <!-- Header -->
         <h2 class="text-lg md:text-xl font-semibold mb-4 text-[#306067]">

@@ -1,13 +1,21 @@
-<script>
-export default {
-  name: 'BtnMain'
-}
-</script>
-
 <template>
   <button
-    class="bg-[#37A0AF] text-white px-5 py-2 rounded-full"
+    type="button"
+    :disabled="disabled || loading"
+    class="px-5 py-2 rounded-full text-white font-semibold transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+    :style="{ backgroundColor: '#37A0AF' }"
   >
-    <slot />
+    <span v-if="loading">Guardando...</span>
+    <span v-else><slot /></span>
   </button>
 </template>
+
+<script>
+export default {
+  name: "BtnMain",
+  props: {
+    disabled: { type: Boolean, default: false },
+    loading: { type: Boolean, default: false },
+  },
+};
+</script>

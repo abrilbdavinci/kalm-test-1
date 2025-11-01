@@ -4,11 +4,12 @@ import Tests from "../views/Tests.vue";
 import TestDetail from "../views/TestDetail.vue"; 
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
-import ResultadoTest from '../views/ResultadoTest.vue';
+import Resultado from '../views/Resultado.vue';
 import { currentUser } from '../main.js';
 import About from "../views/About.vue";
 import Contact from "../views/Contact.vue";
 import Plans from "../views/Plans.vue";
+import Perfil from '../views/Perfil.vue';
 
 const authGuard = (to, from, next) => {
   if (!currentUser.value) {
@@ -27,7 +28,8 @@ const routes = [
   { path: "/about", component: About },
   { path: "/contacto", component: Contact },
   { path: "/planes", component: Plans },
-  { path: '/resultados/:id', component: ResultadoTest, props: true, beforeEnter: authGuard }
+  { path: '/resultado', component: Resultado, props: true, beforeEnter: authGuard },
+  { path: '/perfil', name: 'Perfil', component: Perfil, props: true, beforeEnter: authGuard }
 ];
 
 

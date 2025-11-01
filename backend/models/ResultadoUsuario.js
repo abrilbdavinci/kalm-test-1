@@ -1,17 +1,13 @@
-// models/ResultadoUsuario.js
 import mongoose from "mongoose";
 
 const resultadoUsuarioSchema = new mongoose.Schema({
-  test: { type: mongoose.Schema.Types.ObjectId, ref: "Test", required: true },
-  usuario: { type: mongoose.Schema.Types.ObjectId, ref: "Usuario", required: true },
-  respuestas: [
-    {
-      pregunta: { type: mongoose.Schema.Types.ObjectId, ref: "Pregunta", required: true },
-      scoreKey: { type: String, required: true }
-    }
-  ],
-  resultadoTipo: { type: mongoose.Schema.Types.ObjectId, ref: "ResultadoTipo", required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  testKey: { type: String, enum: ["piel", "cabello"], required: true },
+  resultadoId: { type: mongoose.Schema.Types.ObjectId, ref: "Resultado", required: true },
   fecha: { type: Date, default: Date.now }
 });
+
+// Cada usuario puede tener un único resultado por testKey
+resultadoUsuarioSchema.index({ user: 1, testKey: 1 }, { unique: true });
 
 export default mongoose.model("ResultadoUsuario", resultadoUsuarioSchema);

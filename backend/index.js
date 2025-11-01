@@ -2,14 +2,41 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+
+// Importar rutas
 import routes from "./routes/index.js";
 import userRoutes from "./routes/users.js";
 import testRoutes from "./routes/tests.js";
 import resultadoRoutes from "./routes/resultados.js";
-import jwt from "jsonwebtoken";
+import resultadosUsuariosRoutes from "./routes/resultadosUsuario.js";
 
+// Importar modelo si vas a usarlo directamente en alguna ruta
+import Resultado from "./models/Resultado.js";
+
+dotenv.config();
+
+const app = express();
+
+// ===============================
+// 🧠 MIDDLEWARES
+// ===============================
+app.use(express.json());
+
+// Configuración de CORS
+app.use(
+  cors({
+    origin: "http://localhost:5173", // URL del frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+// ===============================
+// 🔑 AUTENTICACIÓN JWT
+// ===============================
 export const requireAuth = (req, res, next) => {
-  const authHeader = req.headers?.authorization; // optional chaining
+  const authHeader = req.headers?.authorization;
   if (!authHeader) return res.status(401).json({ error: "No autorizado" });
 
   const token = authHeader.split(" ")[1];
@@ -25,35 +52,11 @@ export const requireAuth = (req, res, next) => {
   }
 };
 
-dotenv.config();
-
-const app = express();
-
-// ===============================
-// 🧠 MIDDLEWARES
-// ===============================
-app.use(express.json()); // Permite leer req.body en formato JSON
-
-// ===============================
-// 🧩 CONFIGURACIÓN DE CORS
-// ===============================
-app.use(
-  cors({
-    origin: "http://localhost:5173", // URL del frontend (Vite por defecto)
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
-
-app.use("/users", userRoutes);
 // ===============================
 // 🌐 CONEXIÓN A MONGODB
 // ===============================
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ Conectado a MongoDB"))
   .catch((err) => console.error("❌ Error al conectar a MongoDB", err));
 
@@ -61,42 +64,53 @@ mongoose
 // 📦 RUTAS
 // ===============================
 
-// Rutas generales del proyecto (tests, usuarios, etc.)
+// Rutas generales
 app.use("/", routes);
 
-// Rutas específicas para resultados de tests
+// Rutas de usuarios y autenticación
+app.use("/users", userRoutes);
+
+
+// Rutas de tests
+app.use("/tests", testRoutes);
+
+// Rutas de resultados
 app.use("/resultados", resultadoRoutes);
+app.use("/resultadosUsuarios", resultadosUsuariosRoutes);
+
+// Ruta POST de ejemplo para crear resultados directamente (opcional)
 app.post("/resultados", async (req, res) => {
   try {
-    const { test, usuario, titulo, respuestas, puntaje } = req.body;
+    const { testId, user, testTitle, respuestas, resultado } = req.body;
 
-    if (!test || !usuario || !titulo || !respuestas || puntaje === undefined) {
+    // Validación
+    if (!testId || !user || !testTitle || !respuestas || !resultado) {
       return res.status(400).json({ error: "Faltan datos obligatorios" });
     }
 
+    // Crear resultado
     const nuevoResultado = new Resultado({
-      test: req.body.test, // string permitido, Mongoose lo convierte
-      titulo: req.body.titulo,
-      usuario: req.body.usuario, // string permitido
-      respuestas: selectedOptions.value.map((r, i) => ({
-        pregunta: test.value.questions[i].key, // o id real de la pregunta
-        scoreKey: r.scoreKey,
-      })),
-      puntaje: req.body.puntaje,
+      test: testId,
+      usuario: user,
+      titulo: testTitle,
+      respuestas,
+      puntaje: resultado
     });
 
-    await nuevoResultado.save();
-    res.status(201).json(nuevoResultado);
+    // Guardar en DB
+    const guardado = await nuevoResultado.save();
+
+    // Devuelve el objeto guardado completo
+    res.status(201).json(guardado);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
 
-app.use("/tests", testRoutes);
 
 // ===============================
-// ⚠️ MANEJO DE ERRORES GENERALES
+// ⚠️ MANEJO DE ERRORES
 // ===============================
 
 // Si ninguna ruta coincide
@@ -111,7 +125,7 @@ app.use((err, req, res, next) => {
 });
 
 // ===============================
-// 🚀 SERVIDOR
+// 🚀 INICIAR SERVIDOR
 // ===============================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Servidor corriendo en puerto ${PORT}`));

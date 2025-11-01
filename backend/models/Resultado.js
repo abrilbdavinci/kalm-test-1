@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 
+const respuestaSchema = new mongoose.Schema({
+  pregunta: { type: mongoose.Schema.Types.ObjectId, ref: "Pregunta", required: true },
+  scoreKey: { type: String, required: true },
+});
+
 const resultadoSchema = new mongoose.Schema({
-  test: { type: mongoose.Schema.Types.ObjectId, ref: "Test", required: true },
-  usuario: { type: mongoose.Schema.Types.ObjectId, ref: "Usuario", required: true },
-  respuestas: [
-    {
-      pregunta: { type: mongoose.Schema.Types.ObjectId, ref: "Pregunta", required: true },
-      scoreKey: { type: String, required: true }
-    }
-  ],
-  resultadoFinal: { type: String, required: true },
-  fecha: { type: Date, default: Date.now }
+  testId: { type: mongoose.Schema.Types.ObjectId, ref: "Test", required: true },
+  testTitle: { type: String, required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  respuestas: [respuestaSchema],
+  resultado: { type: String, required: true },
+  fecha: { type: Date, default: Date.now },
 });
 
 export default mongoose.model("Resultado", resultadoSchema);

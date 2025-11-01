@@ -7,13 +7,24 @@
     </div>
 
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl justify-items-center">
-      <TestCard v-for="test in tests" :key="test._id">
+      <TestCard
+        v-for="test in tests"
+        :key="test._id"
+        :class="{'done-card': isTestDone(test.key)}"
+      >
         <template #header>{{ test.title }}</template>
         <template #content>{{ test.description }}</template>
         <template #button>
-          <RouterLink :to="`/tests/${test.key}`">
-            <BtnLight class="w-50 py-2 font-bold">Iniciar Test</BtnLight>
-          </RouterLink>
+          <div v-if="isTestDone(test.key)">
+            <BtnLight class="w-50 py-2 font-bold opacity-60 cursor-not-allowed" disabled>
+              Test ya realizado
+            </BtnLight>
+          </div>
+          <div v-else>
+            <RouterLink :to="`/tests/${test.key}`">
+              <BtnLight class="w-50 py-2 font-bold">Iniciar Test</BtnLight>
+            </RouterLink>
+          </div>
         </template>
       </TestCard>
     </div>
@@ -31,34 +42,48 @@ export default {
   data() {
     return {
       tests: [],
+      resultados: [],
       token: localStorage.getItem('token') || null
     };
   },
+  methods: {
+    isTestDone(testKey) {
+      return this.resultados.some(r => r.testKey === testKey);
+    }
+  },
   async mounted() {
-    // Si no hay token, no hacer fetch
     if (!this.token) return;
 
     try {
-      // Llamada a backend con token en Authorization
-      const res = await fetch('http://localhost:3000/tests', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`
-        }
+      // Obtener tests
+      const resTests = await fetch('http://localhost:3000/tests', {
+        headers: { 'Authorization': `Bearer ${this.token}` }
       });
 
-      if (!res.ok) {
-        // Si el token es inválido o hay error, limpiar tests
-        console.error('Error al cargar los tests:', res.statusText);
-        this.tests = [];
-        return;
-      }
+      if (!resTests.ok) throw new Error('No se pudieron obtener los tests');
+      this.tests = await resTests.json();
 
-      this.tests = await res.json();
+      // Obtener resultados del usuario
+      const userId = JSON.parse(atob(this.token.split('.')[1])).id;
+      const resResultados = await fetch(`http://localhost:3000/resultadosUsuarios/${userId}`, {
+        headers: { 'Authorization': `Bearer ${this.token}` }
+      });
+
+      if (!resResultados.ok) throw new Error('No se pudieron obtener tus resultados');
+      this.resultados = await resResultados.json();
+
     } catch (err) {
-      console.error('Error al obtener tests:', err);
-      this.tests = [];
+      console.error(err);
     }
   }
 };
 </script>
+
+<style scoped>
+.done-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  pointer-events: none; /* evita clicks */
+}
+</style>

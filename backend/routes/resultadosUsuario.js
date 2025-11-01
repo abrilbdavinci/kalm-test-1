@@ -1,10 +1,16 @@
-// routes/resultadosUsuarioRoutes.js
 import express from "express";
-import { guardarResultadoUsuario, obtenerResultadosUsuario } from "../controllers/resultadosUsuarioController.js";
+import { requireAuth } from "../middleware/requireAuth.js";
+import { saveResultadoUsuario, getResultadosUsuario, deleteResultadoUsuario } from "../controllers/resultadoUsuarioController.js";
+
 
 const router = express.Router();
 
-router.post("/", guardarResultadoUsuario);
-router.get("/:usuario", obtenerResultadosUsuario);
+// Guardar o actualizar resultado de usuario
+router.post("/", requireAuth, saveResultadoUsuario);
+
+// Obtener resultados de un usuario
+router.get("/:userId", requireAuth, getResultadosUsuario);
+router.delete("/:userId/:testKey", requireAuth, deleteResultadoUsuario);
+
 
 export default router;

@@ -1,11 +1,13 @@
 import express from "express";
-import mongoose from "mongoose";
+import { requireAuth } from "../middleware/requireAuth.js";
 
 // Importar modelos
 import User from "../models/User.js";
 import Test from "../models/Test.js";
 import Resultado from "../models/Resultado.js";
 
+// Importar controladores de resultados de usuarios
+import { saveResultadoUsuario, getResultadosUsuario, deleteResultadoUsuario } from "../controllers/resultadoUsuarioController.js";
 
 const router = express.Router();
 
@@ -14,7 +16,7 @@ const router = express.Router();
 // Obtener todos los usuarios
 router.get("/users", async (req, res) => {
   try {
-    const users = await User.find().select('-password'); // no devolver contraseñas
+    const users = await User.find().select("-password"); // no devolver contraseñas
     res.json(users);
   } catch (err) {
     res.status(500).json({ error: "Error al obtener usuarios", details: err.message });
@@ -29,7 +31,6 @@ router.post("/users", async (req, res) => {
       return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
-    // Verificar si ya existe el usuario
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "El email ya está registrado" });
@@ -46,7 +47,7 @@ router.post("/users", async (req, res) => {
 // Obtener usuario por ID
 router.get("/users/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).select('-password');
+    const user = await User.findById(req.params.id).select("-password");
     if (!user) return res.status(404).json({ error: "Usuario no encontrado" });
     res.json(user);
   } catch (err) {
@@ -90,7 +91,7 @@ router.get("/tests/:identifier", async (req, res) => {
   }
 });
 
-// Crear un nuevo test (opcional)
+// Crear un nuevo test
 router.post("/tests", async (req, res) => {
   try {
     const test = new Test(req.body);
@@ -103,7 +104,16 @@ router.post("/tests", async (req, res) => {
 
 // ------------------------ RESULTADOS ------------------------
 
-// Obtener todos los resultados
+// Guardar o actualizar un resultado de usuario
+router.post("/resultadosUsuarios", requireAuth, saveResultadoUsuario);
+
+// Obtener resultados de un usuario
+router.get("/resultadosUsuarios/:userId", requireAuth, getResultadosUsuario);
+
+// Eliminar un resultado de usuario (para rehacer test)
+router.delete("/resultadosUsuarios/:userId/:testKey", requireAuth, deleteResultadoUsuario);
+
+// Obtener todos los resultados generales
 router.get("/resultados", async (req, res) => {
   try {
     const resultados = await Resultado.find();
@@ -113,7 +123,7 @@ router.get("/resultados", async (req, res) => {
   }
 });
 
-// Crear un resultado
+// Crear un resultado general
 router.post("/resultados", async (req, res) => {
   try {
     const { testId, testTitle, user, respuestas, resultado, fecha } = req.body;

@@ -1,7 +1,7 @@
 <template>
   <section class="w-3xl">
     <MainTitle>Crear cuenta</MainTitle>
-    <div class="w-full h-130 mx-auto mt-5 p-10 bg-white/20 backdrop-blur-lg rounded-xl shadow-lg">
+    <div class="w-full h-130 mx-auto mt-5 p-10 bg-white/40 backdrop-blur-lg rounded-xl shadow-lg">
 
       <form @submit.prevent="register" class="flex flex-col gap-3 my-10">
         <label class="text-start">Nombre</label>
