@@ -131,7 +131,7 @@ const guardarResultado = async () => {
 </script>
 
 <template>
-  <section class="flex flex-col items-center justify-center px-6 text-center">
+  <section class="flex flex-col items-center justify-start px-6 text-center">
     <MainTitle>Resultados del Test</MainTitle>
     <SubTitle>
       <template #header>
@@ -139,7 +139,7 @@ const guardarResultado = async () => {
       </template>
     </SubTitle>
 
-    <section class="mt-6 w-full max-w-xl">
+    <section class="mt-6 w-full max-w-3xl">
       <p v-if="loading" class="text-gray-500 text-lg">Cargando resultado...</p>
       <p v-else-if="error" class="text-red-500 text-lg">{{ error }}</p>
       <component v-else-if="componenteResultado" :is="componenteResultado" />

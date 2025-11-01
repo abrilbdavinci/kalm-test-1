@@ -134,31 +134,42 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-6 w-full max-w-4xl mx-auto">
+  <div class="flex flex-col gap-6 w-3xl mx-auto">
     <MainTitle v-if="test">{{ test.title }}</MainTitle>
     <SubTitle v-if="test">{{ test.description }}</SubTitle>
 
     <ProgresoPreguntas v-if="test" :total="test.questions.length" :actual="currentQuestion" />
 
     <div v-if="test" class="flex flex-col items-center justify-center">
-      <TestCard>
-        <template #header>Pregunta {{ currentQuestion + 1 }}</template>
-        <template #content>{{ test.questions[currentQuestion].text }}</template>
-        <template #button>
-          <div class="grid gap-2">
-            <div v-for="(opt, oIndex) in test.questions[currentQuestion].options" :key="oIndex"
-              @click="selectOption(opt.scoreKey)" :class="[
-                'cursor-pointer rounded-full p-3 border border-gray-300 text-center transition-colors',
-                selectedOptions[currentQuestion]?.scoreKey === opt.scoreKey
-                  ? 'bg-[#37A0AF] text-white'
-                  : 'bg-white text-gray-800'
-              ]">
-              {{ opt.text }}
-            </div>
-          </div>
-        </template>
-      </TestCard>
+      <!-- Reemplazo de TestCard por div -->
+      <div
+        class="bg-white/20 backdrop-blur-[10px] border border-white/30 rounded-xl shadow-md p-6 w-full max-w-3xl flex flex-col gap-4">
+        <!-- Header -->
+        <div class="text-lg font-bold text-[#306067] text-center">
+          Pregunta {{ currentQuestion + 1 }}
+        </div>
 
+        <!-- Contenido -->
+        <div class="text-gray-800 text-center">
+          {{ test.questions[currentQuestion].text }}
+        </div>
+
+        <!-- Opciones -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div v-for="(opt, oIndex) in test.questions[currentQuestion].options" :key="oIndex"
+            @click="selectOption(opt.scoreKey)" :class="[
+              'cursor-pointer rounded-full border border-gray-300 text-center transition-colors flex items-center justify-center p-4 min-h-[60px] w-full',
+              selectedOptions[currentQuestion]?.scoreKey === opt.scoreKey
+                ? 'bg-[#37A0AF] text-white'
+                : 'bg-white text-gray-800'
+            ]">
+            {{ opt.text }}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navegación -->
       <div class="flex justify-between w-full py-5">
         <BtnLight class="w-1/3" @click="prevQuestion" :disabled="currentQuestion === 0">Atrás</BtnLight>
         <BtnDark v-if="currentQuestion < test.questions.length - 1" class="w-1/3" @click="nextQuestion"

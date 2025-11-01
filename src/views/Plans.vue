@@ -55,10 +55,10 @@ const plans = [
     <MainTitle>Planes</MainTitle>
     <SubTitle class="text-center">Elige el plan que mejor se adapte a tus necesidades.</SubTitle>
 
-    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6 mt-8 items-stretch">
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6 mt-3 items-stretch">
       <div v-for="plan in plans" :key="plan.id" :class="[
-        'p-1 rounded-2xl flex', // padding pequeño para que el gradiente sea borde
-        plan.main ? 'bg-gradient-to-b from-[#37A0AF] to-[#CCE2E5]' : 'bg-[#E9E5E3]'
+        'py-4 rounded-2xl flex', // padding pequeño para que el gradiente sea borde
+        plan.main ? 'bg-gradient-to-b from-[#37A0AF] to-[#CCE2E5] py-4 px-2' : 'bg-[#FFFFFFFF]'
       ]">
         <!-- Contenedor interno blanco -->
         <div class="flex flex-col py-6 px-8 rounded-2xl bg-white/80 w-full h-full">
@@ -77,8 +77,8 @@ const plans = [
           </ul>
 
           <div class="mt-auto flex justify-center">
-            <BtnMain v-if="plan.main">{{ plan.buttonText }}</BtnMain>
-            <BtnDark v-else>{{ plan.buttonText }}</BtnDark>
+            <BtnMain v-if="plan.main" class="w-50">{{ plan.buttonText }}</BtnMain>
+            <BtnDark v-else class="w-50">{{ plan.buttonText }} </BtnDark>
           </div>
         </div>
       </div>

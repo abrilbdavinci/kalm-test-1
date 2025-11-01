@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col items-center gap-8 p-6">
+  <div class="w-full flex flex-col items-center gap-8">
     <MainTitle>Elegir un test para empezar</MainTitle>
 
     <div v-if="!token" class="text-red-600 text-lg">

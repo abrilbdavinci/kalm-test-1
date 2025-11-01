@@ -69,6 +69,17 @@ app.use("/", routes);
 
 // Rutas de usuarios y autenticación
 app.use("/users", userRoutes);
+// ejemplo en Express
+app.get('/usuers/:id', async (req, res) => {
+  try {
+    const user = await Usuario.findById(req.params.id).select('-password'); // no enviar password
+    if (!user) return res.status(404).json({ msg: 'Usuario no encontrado' });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ msg: 'Error al obtener usuario' });
+  }
+});
+
 
 
 // Rutas de tests

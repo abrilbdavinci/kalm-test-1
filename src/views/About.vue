@@ -5,9 +5,9 @@ import BtnMain from '../components/BtnMain.vue';
 </script>
 
 <template>
-  <section class="flex flex-col items-center gap-8 max-w-5xl mx-auto">
+  <section class="flex flex-col items-center gap-8 max-w-6xl mx-auto">
     <!-- Título principal -->
-    <MainTitle>Acerca de Nosotros</MainTitle>
+    <MainTitle>Sobre Kälm</MainTitle>
 
     <!-- Subtítulo general -->
     <SubTitle class="text-center max-w-3xl">
