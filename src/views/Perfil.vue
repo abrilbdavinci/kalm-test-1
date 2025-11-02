@@ -112,18 +112,18 @@ const rehacerTest = async (testKey) => {
 
                     <div v-if="getResultadoByTestKey(testKey)">
                         <p><strong>Resultado:</strong> {{ getResultadoByTestKey(testKey).resultadoId.resultado }}</p>
-                        <BtnLight class="mt-4" @click="rehacerTest(testKey)">Rehacer Test</BtnLight>
+                        <BtnLight class="mt-4 mx-auto" @click="rehacerTest(testKey)">Rehacer Test</BtnLight>
                     </div>
 
                     <div v-else>
                         <p class="text-gray-600">Aún no realizaste este test.</p>
-                        <BtnMain class="mt-4" @click="$router.push(`/tests?id=${testKey}`)">Hacer Test</BtnMain>
+                        <BtnDark class="mt-4 mx-auto" @click="$router.push(`/tests?id=${testKey}`)">Hacer Test</BtnDark>
                     </div>
                 </div>
             </div>
 
             <div class="mt-10 flex justify-center gap-4">
-                <BtnLight @click="$router.push('/tests')">Ver todos los tests</BtnLight>
+                <BtnMain @click="$router.push('/tests')">Ver todos los tests</BtnMain>
             </div>
         </div>
 

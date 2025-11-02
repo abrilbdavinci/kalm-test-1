@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col items-center gap-8">
+  <div class="w-full flex flex-col items-center gap-4">
     <MainTitle>Elegir un test</MainTitle>
 
     <div v-if="!token" class="text-red-600 text-lg">
@@ -7,29 +7,40 @@
     </div>
 
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full justify-items-center">
-      <TestCard
-        v-for="test in tests"
-        :key="test._id"
-        :class="{'done-card': isTestDone(test.key)}"
-      >
-        <template #header>{{ test.title }}</template>
-        <template #content>{{ test.description }}</template>
-        <template #button>
-          <div v-if="isTestDone(test.key)">
-            <BtnMain class="w-50 py-2 font-bold cursor-not-allowed" disabled>
-              Test ya realizado
-            </BtnMain>
-          </div>
-          <div v-else>
-            <RouterLink :to="`/tests/${test.key}`">
-              <BtnLight class="w-50 py-2 font-bold">Iniciar Test</BtnLight>
-            </RouterLink>
-          </div>
-        </template>
-      </TestCard>
+      <div v-for="test in tests" :key="test._id" class="flex flex-col items-center text-center gap-4 w-full">
+        <!-- Título y descripción fuera de la card -->
+        <h2 class="text-lg md:text-xl font-semibold text-[#306067]">
+          {{ test.title }}
+        </h2>
+        <p class="text-base md:text-lg text-gray-700">
+          {{ test.description }}
+        </p>
+
+        <!-- TestCard solo contiene el botón -->
+        <TestCard :class="[
+          isTestDone(test.key) ? 'done-card' : '',
+          test.key === 'piel' ? 'card-piel' : '',
+          test.key === 'cabello' ? 'card-cabello' : ''
+        ]">
+
+          <template #button>
+            <div v-if="isTestDone(test.key)">
+              <BtnMain class="w-50 py-2 font-bold cursor-not-allowed" disabled>
+                Test ya realizado
+              </BtnMain>
+            </div>
+            <div v-else>
+              <RouterLink :to="`/tests/${test.key}`">
+                <BtnLight class="w-50 py-2 font-bold">Iniciar Test</BtnLight>
+              </RouterLink>
+            </div>
+          </template>
+        </TestCard>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import TestCard from '../components/TestCard.vue';
@@ -80,11 +91,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.done-card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.3);
-  pointer-events: none; /* evita clicks */
-}
-</style>
+

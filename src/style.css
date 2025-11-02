@@ -35,28 +35,30 @@ h1,h2, h3, h4, h5, h6 {
   pointer-events: none;
 }
 
-/* Fondo base de las TestCard */
 .TestCard {
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 1rem;
   overflow: hidden;
   transition: transform 0.3s ease;
+  min-height: 500px;
 }
 
 .TestCard:hover {
   transform: scale(1.02);
 }
 
-/* 👇 Primera card: test de piel */
-.TestCard:nth-child(1) {
+/* Imagen para test de piel */
+.card-piel {
   background-image: url('./assets/img/portada_test_piel.png');
 }
 
-/* 👇 Segunda card: test de cabello */
-.TestCard:nth-child(2) {
-  background-image: url('@/assets/img/bg_cabello.jpg');
+/* Imagen para test de cabello */
+.card-cabello {
+  background-image: url('./assets/img/portada_test_cabello.png');
 }
+
 
 /* Responsividad: las imágenes se adaptan sin deformarse */
 @media (max-width: 768px) {
