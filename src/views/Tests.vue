@@ -16,7 +16,7 @@
         <template #content>{{ test.description }}</template>
         <template #button>
           <div v-if="isTestDone(test.key)">
-            <BtnMain class="w-50 py-2 font-bold opacity-60 cursor-not-allowed" disabled>
+            <BtnMain class="w-50 py-2 font-bold cursor-not-allowed" disabled>
               Test ya realizado
             </BtnMain>
           </div>

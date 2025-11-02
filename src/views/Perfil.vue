@@ -112,7 +112,7 @@ const rehacerTest = async (testKey) => {
 
                     <div v-if="getResultadoByTestKey(testKey)">
                         <p><strong>Resultado:</strong> {{ getResultadoByTestKey(testKey).resultadoId.resultado }}</p>
-                        <BtnMain class="mt-4" @click="rehacerTest(testKey)">Rehacer Test</BtnMain>
+                        <BtnLight class="mt-4" @click="rehacerTest(testKey)">Rehacer Test</BtnLight>
                     </div>
 
                     <div v-else>
