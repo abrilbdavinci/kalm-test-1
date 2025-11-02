@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap');
 
 @font-face {
   font-family: 'Tropiline';
@@ -14,11 +13,11 @@ body {
 }
 
 .header-bg {
-  background-image: url('/src/assets/img/bg3.jpg'); /* reemplazá con tu imagen */
-  background-size: cover;       /* la imagen cubre todo el header */
-  background-position: center;  /* centrada */
-  background-repeat: no-repeat;          /* altura inicial, podés cambiarla */
-  display: flex;                /* centra contenido */
+  background-image: url('/src/assets/img/bg3.jpg'); 
+  background-size: cover;       
+  background-position: center;  
+  background-repeat: no-repeat;         
+  display: flex;                
   align-items: center;
   justify-content: center;
 }
