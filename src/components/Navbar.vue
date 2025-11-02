@@ -27,7 +27,7 @@ export default {
 <template>
   <nav
     class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1500px] 
-            backdrop-blur-[40px] bg-white/20 border border-white/40 
+            backdrop-blur-[100px] bg-white/10 border border-white/40 
             rounded-full shadow-[0_8px_30px_rgba(55,160,175,0.3)] 
             p-3 flex items-center justify-between z-50">
 
