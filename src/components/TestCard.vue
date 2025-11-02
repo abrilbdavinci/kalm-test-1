@@ -1,35 +1,39 @@
 <script>
 import BtnDark from './BtnDark.vue'
-import SubTitle from './SubTitle.vue';
+import SubTitle from './SubTitle.vue'
 
 export default {
-    name: 'TestCard',
-    components: {
-        BtnDark,
-        SubTitle
-    },
+  name: 'TestCard',
+  components: {
+    BtnDark,
+    SubTitle
+  },
 }
 </script>
 
 <template>
-    <div
-        class="bg-white/40 backdrop-blur-lg rounded-xl shadow-lg p-6 flex flex-col justify-between h-full w-full max-w-xl">
+  <div
+    class="TestCard relative rounded-xl shadow-lg flex flex-col justify-between h-100 w-full overflow-hidden">
 
-        <!-- Header -->
-        <h2 class="text-lg md:text-xl font-semibold mb-4 text-[#306067]">
-            <slot name="header">Título del Test</slot>
-        </h2>
+    <!-- Capa semitransparente encima del background -->
+    <div class="absolute inset-0 bg-white/40 backdrop-blur-[1px]"></div>
 
+    <!-- Contenido -->
+    <div class="relative z-10 p-6 flex flex-col justify-between h-full">
+      <!-- Header -->
+      <h2 class="text-lg md:text-xl font-semibold mb-4 text-[#306067]">
+        <slot name="header">Título del Test</slot>
+      </h2>
 
-        <!-- Contenido -->
-        <SubTitle class="text-lg md:text-xl font-semibold mb-4 text-[#306067]">
-            <slot name="content">Descripción del test</slot>
-        </SubTitle>
+      <!-- Descripción -->
+      <SubTitle class="text-lg md:text-xl font-semibold mb-4 text-[#306067]">
+        <slot name="content">Descripción del test</slot>
+      </SubTitle>
 
-        <!-- Botón -->
-        <slot name="button">
-            <BtnDark class="w-full py-2 font-bold">Comenzar</BtnDark>
-        </slot>
-
+      <!-- Botón -->
+      <slot name="button">
+        <BtnDark class="w-full py-2 font-bold">Comenzar</BtnDark>
+      </slot>
     </div>
+  </div>
 </template>

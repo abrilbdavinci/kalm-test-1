@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template>
-  <section class="w-4xl flex flex-col items-center mx-auto">
+  <section class="max-w-6xl flex flex-col items-center mx-auto">
 
     <!-- Sección principal -->
     <MainTitle>Una nueva forma de cuidarte</MainTitle>
@@ -38,10 +38,10 @@ export default {
     </RouterLink>
 
     <!-- Nueva sección de cards -->
-    <div class="mt-16 flex flex-col items-center">
+    <div class="mt-16 flex flex-col items-center ">
       <SubTitle class="mb-8 text-center text-2xl font-semibold">Descubrí tu próxima rutina</SubTitle>
 
-      <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-3 w-6xl">
+      <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-3 w-full">
         <!-- Card 1 -->
         <div class="flex flex-col items-start px-6 py-15 rounded-xl bg-gradient-to-b from-[#D7EEF2] to-white shadow-md">
           <img src="./../assets/img/self_care_icon.png" alt="Rutinas" class="w-12 h-12 mb-4 object-contain">

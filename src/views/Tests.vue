@@ -1,12 +1,12 @@
 <template>
   <div class="w-full flex flex-col items-center gap-8">
-    <MainTitle>Elegir un test para empezar</MainTitle>
+    <MainTitle>Elegir un test</MainTitle>
 
     <div v-if="!token" class="text-red-600 text-lg">
       Debes iniciar sesión para ver los tests.
     </div>
 
-    <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl justify-items-center">
+    <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full justify-items-center">
       <TestCard
         v-for="test in tests"
         :key="test._id"
@@ -16,9 +16,9 @@
         <template #content>{{ test.description }}</template>
         <template #button>
           <div v-if="isTestDone(test.key)">
-            <BtnLight class="w-50 py-2 font-bold opacity-60 cursor-not-allowed" disabled>
+            <BtnMain class="w-50 py-2 font-bold opacity-60 cursor-not-allowed" disabled>
               Test ya realizado
-            </BtnLight>
+            </BtnMain>
           </div>
           <div v-else>
             <RouterLink :to="`/tests/${test.key}`">
@@ -34,11 +34,12 @@
 <script>
 import TestCard from '../components/TestCard.vue';
 import BtnLight from '../components/BtnLight.vue';
+import BtnMain from '../components/BtnMain.vue';
 import MainTitle from '../components/MainTitle.vue';
 
 export default {
   name: 'Tests',
-  components: { TestCard, BtnLight, MainTitle },
+  components: { TestCard, BtnLight, MainTitle, BtnMain },
   data() {
     return {
       tests: [],

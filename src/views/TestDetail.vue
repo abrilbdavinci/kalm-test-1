@@ -158,7 +158,7 @@ onMounted(async () => {
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div v-for="(opt, oIndex) in test.questions[currentQuestion].options" :key="oIndex"
             @click="selectOption(opt.scoreKey)" :class="[
-              'cursor-pointer rounded-full border border-gray-300 text-center transition-colors flex items-center justify-center p-4 min-h-[60px] w-full',
+              'cursor-pointer rounded-full border border-gray-300 text-center transition-colors flex items-center justify-center p-4 min-h-[82px] w-full',
               selectedOptions[currentQuestion]?.scoreKey === opt.scoreKey
                 ? 'bg-[#37A0AF] text-white'
                 : 'bg-white text-gray-800'
@@ -166,6 +166,7 @@ onMounted(async () => {
             {{ opt.text }}
           </div>
         </div>
+
 
       </div>
 

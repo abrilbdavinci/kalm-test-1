@@ -27,12 +27,12 @@ export default {
 <template>
   <nav
     class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1500px] 
-            backdrop-blur-[100px] bg-white/10 border border-white/40 
+            backdrop-blur-[100px] bg-white/30 border border-white/40 
             rounded-full shadow-[0_8px_30px_rgba(55,160,175,0.3)] 
             p-3 flex items-center justify-between z-50">
 
-    <div class="flex items-center">
-      <MainTitle>Kälm</MainTitle>
+    <div class="flex items-center ml-5">
+      <img src="./../assets/img/logo-nav.png" alt="">
     </div>
 
     <div class="flex flex-1 justify-center space-x-6">
@@ -58,10 +58,10 @@ export default {
       </template>
 
       <template v-else>
-        <SubTitle class="text-lg md:text-xl font-bold text-[#306067] flex items-center gap-4">
+        <h2 class="text-lg md:text-xl font-bold text-[#F7FEFFFF] flex items-center gap-4">
           Hola, {{ currentUser.name }}
           <!-- Link al perfil -->
-        </SubTitle>
+        </h2>
         <BtnDark>
             <RouterLink to="/perfil">
               Mi Perfil

@@ -13,7 +13,7 @@ body {
 }
 
 .header-bg {
-  background-image: url('/src/assets/img/bg3.jpg'); 
+  background-image: url('/src/assets/img/bg2.jpg'); 
   background-size: cover;       
   background-position: center;  
   background-repeat: no-repeat;         
@@ -25,21 +25,43 @@ h1,h2, h3, h4, h5, h6 {
   font-family: 'Tropiline', sans-serif;
 }
 
-.glass-card {
+/* === TESTS VIEW === */
+
+/* Efecto glass para los tests completados */
+.done-card {
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  pointer-events: none;
 }
 
-/* Puedes asignar un background image mediante clase extra */
-.glass-card.piel {
-  background-image: url('/images/piel-bg.jpg');
-  background-size: cover;
+/* Fondo base de las TestCard */
+.TestCard {
   background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
-.glass-card.cabello {
-  background-image: url('/images/cabello-bg.jpg');
-  background-size: cover;
-  background-position: center;
+.TestCard:hover {
+  transform: scale(1.02);
+}
+
+/* 👇 Primera card: test de piel */
+.TestCard:nth-child(1) {
+  background-image: url('./assets/img/portada_test_piel.png');
+}
+
+/* 👇 Segunda card: test de cabello */
+.TestCard:nth-child(2) {
+  background-image: url('@/assets/img/bg_cabello.jpg');
+}
+
+/* Responsividad: las imágenes se adaptan sin deformarse */
+@media (max-width: 768px) {
+  .TestCard {
+    background-position: center;
+    background-size: cover;
+  }
 }
