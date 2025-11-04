@@ -10,6 +10,9 @@ import userRoutes from "./routes/users.js";
 import testRoutes from "./routes/tests.js";
 import resultadoRoutes from "./routes/resultados.js";
 import resultadosUsuariosRoutes from "./routes/resultadosUsuario.js";
+import postRoutes from "./routes/posts.js";
+import reviewRoutes from "./routes/reviews.js";
+import followRoutes from "./routes/follow.js";
 
 // Importar modelo si vas a usarlo directamente en alguna ruta
 import Resultado from "./models/Resultado.js";
@@ -79,6 +82,10 @@ app.get('/usuers/:id', async (req, res) => {
     res.status(500).json({ msg: 'Error al obtener usuario' });
   }
 });
+
+app.use("/posts", postRoutes);
+app.use("/reviews", reviewRoutes);
+app.use("/users", followRoutes);
 
 
 
