@@ -86,48 +86,99 @@ const rehacerTest = async (testKey) => {
 </script>
 
 <template>
-    <section class="flex flex-col items-center max-w-6xl mx-auto">
-        <MainTitle class="mb-2">Mi perfil</MainTitle>
-
-        <!-- Info adicional del usuario -->
-        <div v-if="!loading && !error"
-            class="w-4xl bg-white/20 backdrop-blur-[20px] border border-white/30 rounded-xl p-6 shadow-md mt-6">
-            <div class="flex justify-between items-center w-full">
-                <div class="flex flex-col items-start info-perfil">
-                    <p class="mb-2"><strong>Nombre:</strong> {{ currentUser?.name || "-" }}</p>
-                    <p class="mb-2"><strong>Email:</strong> {{ currentUser?.email || "-" }}</p>
-                    <p class="mb-2"><strong>Perfil creado el:</strong> {{ fechaCreacion || "-" }}</p>
-                </div>
-
-                <BtnDark class="mt-0">Editar perfil</BtnDark>
-            </div>
-
-
-
-            <!-- Resultados de tests -->
-            <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 mt-8">
-                <div v-for="testKey in ['piel', 'cabello']" :key="testKey"
-                    class="glass-card flex flex-col justify-between p-6 rounded-xl shadow relative overflow-hidden">
-                    <h2 class="text-lg font-bold text-[#306067] capitalize mb-2">{{ testKey }}</h2>
-
-                    <div v-if="getResultadoByTestKey(testKey)">
-                        <p><strong>Resultado:</strong> {{ getResultadoByTestKey(testKey).resultadoId.resultado }}</p>
-                        <BtnLight class="mt-4 mx-auto" @click="rehacerTest(testKey)">Rehacer Test</BtnLight>
-                    </div>
-
-                    <div v-else>
-                        <p class="text-gray-600">Aún no realizaste este test.</p>
-                        <BtnDark class="mt-4 mx-auto" @click="$router.push(`/tests?id=${testKey}`)">Hacer Test</BtnDark>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-10 flex justify-center gap-4">
-                <BtnMain @click="$router.push('/tests')">Ver todos los tests</BtnMain>
-            </div>
+    <section class="flex flex-col lg:flex-row w-full mx-auto gap-6">
+  
+      <!-- === COLUMNA IZQUIERDA — PERFIL === -->
+      <aside class="w-full h-100 lg:w-[35%] bg-white/20 backdrop-blur-[20px] border border-white/30 rounded-2xl p-6 shadow-md flex flex-col items-center text-center">
+  
+        <!-- Avatar -->
+        <div class="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden mb-3">
+          <img v-if="currentUser?.avatar" :src="currentUser.avatar" class="w-full h-full object-cover">
+          <div v-else class="w-full h-full bg-gray-300"></div>
         </div>
-
-        <p v-if="loading" class="text-gray-500 text-lg mt-6">Cargando perfil...</p>
-        <p v-else-if="error" class="text-red-500 text-lg mt-6">{{ error }}</p>
+  
+        <!-- Datos Usuario -->
+        <h2 class="text-xl font-semibold flex items-center gap-1">
+          {{ currentUser?.name || "Usuario ✨" }}
+        </h2>
+        <p class="text-sm text-gray-600">mi biografía re chu</p>
+  
+        <!-- Stats -->
+        <div class="flex justify-center gap-8 my-4">
+          <div class="text-center">
+            <p class="font-bold">10</p>
+            <p class="text-xs text-gray-600">seguidores</p>
+          </div>
+          <div class="text-center">
+            <p class="font-bold">30</p>
+            <p class="text-xs text-gray-600">seguidos</p>
+          </div>
+          <div class="text-center">
+            <p class="font-bold">3</p>
+            <p class="text-xs text-gray-600">posteos</p>
+          </div>
+        </div>
+  
+        <!-- Botones -->
+        <div class="flex flex-col w-50 gap-2">
+          <BtnDark @click="router.push('/editar-perfil')">Editar mi perfil</BtnDark>
+          <!-- <BtnLight>Seguir</BtnLight> -->
+        </div>
+  
+        <!-- Fecha creación -->
+        <p class="text-xs text-gray-500 mt-4">Miembro desde {{ fechaCreacion }}</p>
+  
+      </aside>
+  
+      <!-- === COLUMNA DERECHA — CONTENIDO === -->
+      <section class="w-full lg:w-[65%] flex flex-col gap-4">
+  
+        
+  
+        <!-- Panel de test (tu lógica original) -->
+        <section v-if="!loading && !error" class="bg-white/20 backdrop-blur-[20px] border border-white/30 rounded-xl p-6">
+          <h3 class="text-lg font-semibold text-[#306067] mb-4">Mis tests</h3>
+  
+          <div class="grid gap-6 md:grid-cols-2">
+            <div 
+              v-for="testKey in ['piel','cabello']"
+              :key="testKey"
+              class="glass-card flex flex-col p-4 rounded-xl shadow"
+            >
+              <h4 class="font-bold capitalize mb-2">{{ testKey }}</h4>
+  
+              <template v-if="getResultadoByTestKey(testKey)">
+                <p class="text-sm">
+                  <strong>Resultado:</strong> {{ getResultadoByTestKey(testKey).resultadoId.resultado }}
+                </p>
+                <BtnLight class="mt-4 w-full" @click="rehacerTest(testKey)">Rehacer test</BtnLight>
+              </template>
+  
+              <template v-else>
+                <p class="text-gray-600 text-sm">Aún no realizaste este test.</p>
+                <BtnDark class="mt-4 w-full" @click="$router.push(`/tests?id=${testKey}`)">Hacer test</BtnDark>
+              </template>
+            </div>
+          </div>
+        </section>
+        <!-- Tabs contenido -->
+        <nav class="w-full bg-white/20 backdrop-blur-[20px] border border-white/30 rounded-xl p-4 flex justify-around text-sm font-medium">
+          <button class="hover:font-semibold">Posts</button>
+          <button class="hover:font-semibold">Reviews</button>
+          <button class="hover:font-semibold">Rutinas</button>
+        </nav>
+  
+        <!-- Placeholder feed posts -->
+        <section class="bg-white/20 backdrop-blur-[20px] border border-white/30 rounded-xl h-96 flex items-center justify-center text-gray-700">
+          posteos?? scroll obvio
+        </section>
+  
+      </section>
+  
+      <!-- Loading / Error -->
+      <p v-if="loading" class="text-gray-500 text-lg mt-6 text-center w-full">Cargando perfil...</p>
+      <p v-else-if="error" class="text-red-500 text-lg mt-6 text-center w-full">{{ error }}</p>
+  
     </section>
-</template>
+  </template>
+  
