@@ -26,28 +26,72 @@ export default {
 
 <template>
   <nav
-    class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[1500px] 
-            backdrop-blur-[100px] bg-white/30 border border-white/40 
-            rounded-full shadow-[0_8px_30px_rgba(55,160,175,0.3)] 
-            p-3 flex items-center justify-between z-50">
-
-    <div class="flex items-center ml-5">
-      <img src="./../assets/img/logo-nav.png" alt="">
+    class="fixed z-50 flex items-center justify-between 
+           glass-nav rounded-full border border-white/40 
+           shadow-[0_8px_30px_rgba(55,160,175,0.3)] 
+           p-3 w-[95%] max-w-[1500px]
+           left-1/2 -translate-x-1/2 top-4
+           transition-all duration-500 ease-in-out
+           backdrop-blur-[100px] bg-white/30
+           max-[1060px]:bottom-4 max-[1060px]:top-auto 
+           max-[1060px]:rounded-full max-[1060px]:py-5 px-7
+           max-[1060px]:w-[95%] max-[1060px]:justify-center"
+  >
+    <!-- LOGO -->
+    <div class="hidden min-[1061px]:flex items-center ml-5">
+      <img src="./../assets/img/logo-nav.png" alt="Logo Kälm" class="h-10">
     </div>
 
-    <div class="flex flex-1 justify-center space-x-6">
-      <RouterLink to="/" class="font-bold transition hover:text-teal-400" style="color: #306067;">Inicio</RouterLink>
-      <RouterLink to="/tests" class="font-bold transition hover:text-teal-400" style="color: #306067;">Tests
+    <!-- ÍCONOS DE NAVEGACIÓN -->
+    <div class="flex flex-1 items-center space-x-6 justify-between min-[1061px]:justify-center min-[1061px]:space-x-8">
+      <!-- Inicio -->
+      <RouterLink
+        to="/"
+        class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
+      >
+        <font-awesome-icon icon="fa-solid fa-house" class="text-xl md:mr-2" />
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Inicio</span>
       </RouterLink>
-      <RouterLink to="/planes" class="font-bold transition hover:text-teal-400" style="color: #306067;">Planes
+
+      <!-- Tests -->
+      <RouterLink
+        to="/tests"
+        class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
+      >
+        <font-awesome-icon icon="fa-solid fa-vials" class="text-xl md:mr-2" />
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Tests</span>
       </RouterLink>
-      <RouterLink to="/about" class="font-bold transition hover:text-teal-400" style="color: #306067;">Sobre Kälm
+
+      <!-- Planes -->
+      <RouterLink
+        to="/planes"
+        class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
+      >
+        <font-awesome-icon icon="fa-solid fa-list-check" class="text-xl md:mr-2" />
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Planes</span>
       </RouterLink>
-      <RouterLink to="/contacto" class="font-bold transition hover:text-teal-400" style="color: #306067;">Contacto
+
+      <!-- Sobre -->
+      <RouterLink
+        to="/about"
+        class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
+      >
+        <font-awesome-icon icon="fa-solid fa-leaf" class="text-xl md:mr-2" />
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Sobre</span>
+      </RouterLink>
+
+      <!-- Contacto -->
+      <RouterLink
+        to="/contacto"
+        class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
+      >
+        <font-awesome-icon icon="fa-solid fa-envelope" class="text-xl md:mr-2" />
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Contacto</span>
       </RouterLink>
     </div>
 
-    <div class="flex space-x-3">
+    <!-- BOTONES DE USUARIO / CUENTA -->
+    <div class="hidden min-[1061px]:flex items-center gap-4 justify-end w-auto">
       <template v-if="!currentUser">
         <RouterLink to="/login">
           <BtnLight>Iniciar sesión</BtnLight>
@@ -58,16 +102,12 @@ export default {
       </template>
 
       <template v-else>
-        <h2 class="text-lg md:text-xl font-bold text-[#F7FEFFFF] flex items-center gap-4">
+        <h2 class="text-lg font-bold text-[#F7FEFFFF]">
           Hola, {{ currentUser.name }}
-          <!-- Link al perfil -->
         </h2>
         <BtnDark>
-            <RouterLink to="/perfil">
-              Mi Perfil
-            </RouterLink>
-          </BtnDark>
-
+          <RouterLink to="/perfil">Mi Perfil</RouterLink>
+        </BtnDark>
         <BtnLight @click="logout">Cerrar sesión</BtnLight>
       </template>
     </div>

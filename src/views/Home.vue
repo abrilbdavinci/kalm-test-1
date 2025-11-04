@@ -28,7 +28,7 @@ export default {
 
     <!-- Imagen de fondo adaptativa -->
     <div 
-      class="w-full max-w-3xl h-64 sm:h-80 md:h-96 bg-center bg-cover rounded-xl my-5"
+      class="w-full max-w-3xl h-64 sm:h-80 md:h-96 bg-center bg-cover rounded-xl my-3"
       :style="{ backgroundImage: 'url(/src/assets/img/mockups1.png)' }">
     </div>
 
@@ -70,7 +70,7 @@ export default {
       <img 
         src="./../assets/img/pasos.png" 
         alt="Imagen decorativa" 
-        class="w-full h-auto rounded-xl object-cover"
+        class="w-3xl h-auto mx-auto object-cover"
       >
     </div>
 

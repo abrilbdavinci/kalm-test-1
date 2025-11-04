@@ -87,7 +87,7 @@ const rehacerTest = async (testKey) => {
 
 <template>
     <section class="flex flex-col items-center max-w-6xl mx-auto">
-        <MainTitle class="mb-4">Mi perfil</MainTitle>
+        <MainTitle class="mb-2">Mi perfil</MainTitle>
 
         <!-- Info adicional del usuario -->
         <div v-if="!loading && !error"
