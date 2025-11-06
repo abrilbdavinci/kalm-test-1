@@ -33,7 +33,7 @@ export default {
     <!-- LOGO IZQUIERDA -->
     <div class="flex items-center">
       <img
-        src="./../assets/img/logo-nav.png"
+        src="./../assets/img/logo-kalm.svg"
         alt="Logo Kälm"
         class="h-8 w-auto object-contain"
       />

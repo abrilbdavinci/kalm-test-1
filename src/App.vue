@@ -20,13 +20,12 @@ export default {
     <Navbar />
     <main
   class="flex grow container mx-auto
-         px-4 py-22 text-center justify-center"
+        px-4 py-22 text-center justify-center"
 >
 
       <RouterView />
     </main>
     <Footer class="hidden min-[1061px]:flex justify-center items-center">
-      &copy; Kälm 2025
     </Footer>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <button
     :disabled="disabled || loading"
-    class="btn-light px-6 py-2 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2"
+    class="btn-light px-6 pt-3 py-2 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2"
     :class="{
       'opacity-60 cursor-not-allowed': disabled || loading,
       'hover:brightness-95': !disabled && !loading
@@ -26,6 +26,5 @@ export default {
 .btn-light {
   background-color: #E6F4F7;
   color: #306067;
-  border: 1px solid #306067;
 }
 </style>
