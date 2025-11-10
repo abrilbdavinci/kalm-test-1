@@ -1,8 +1,8 @@
 <template>
   <section class="w-3xl">
     <MainTitle>Iniciar sesión</MainTitle>
-    <div class="w-full h-120 mx-auto mt-5 p-10 bg-white/40 backdrop-blur-lg rounded-xl shadow-lg">
-      <form @submit.prevent="login" class="flex flex-col gap-3 my-10">
+    <div class="w-full h-auto mx-auto mt-5 p-10 bg-white/40 backdrop-blur-lg rounded-xl shadow-lg">
+      <form @submit.prevent="login" class="flex flex-col gap-3">
         <label class="text-start">Email</label>
         <input v-model="email" type="email" class="p-2 rounded-full border" required />
 
