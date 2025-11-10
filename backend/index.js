@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from 'path';
 import jwt from "jsonwebtoken";
 
 // Importar rutas
@@ -13,6 +14,9 @@ import resultadosUsuariosRoutes from "./routes/resultadosUsuario.js";
 import postRoutes from "./routes/posts.js";
 import reviewRoutes from "./routes/reviews.js";
 import followRoutes from "./routes/follow.js";
+import storiesRoutes from './routes/stories.js';
+import bannersRoutes from './routes/banners.js';
+import productsRoutes from './routes/products.js';
 
 // Importar modelo si vas a usarlo directamente en alguna ruta
 import Resultado from "./models/Resultado.js";
@@ -126,6 +130,10 @@ app.post("/resultados", async (req, res) => {
   }
 });
 
+app.use('/stories', storiesRoutes);
+app.use('/banners', bannersRoutes);
+app.use('/products', productsRoutes);
+
 
 // ===============================
 // ⚠️ MANEJO DE ERRORES
@@ -141,6 +149,9 @@ app.use((err, req, res, next) => {
   console.error("💥 Error interno:", err);
   res.status(500).json({ error: "Error interno del servidor" });
 });
+
+
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // ===============================
 // 🚀 INICIAR SERVIDOR
