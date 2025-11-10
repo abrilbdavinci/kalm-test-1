@@ -6,8 +6,7 @@ const historial = ref(["Nivea", "Eximia", "Head & Shoulders", "The Ordinary"]);
 </script>
 
 <template>
-  <section class="p-4 flex flex-col gap-4">
-    <h1 class="text-2xl font-bold text-[#306067]">Kälm</h1>
+  <section class="flex flex-col gap-4 w-full lg:w-250">
     <SearchBar />
 
     <div class="flex flex-col gap-3 mt-4">

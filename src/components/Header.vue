@@ -39,37 +39,54 @@ export default {
       />
     </div>
 
-    <!-- MENSAJE CENTRAL -->
-    <div class="flex-1 flex justify-center">
-      <template v-if="currentUser">
-        <h2 class="text-[#306067] font-semibold text-base">
-          Hola, {{ currentUser.name }}
-        </h2>
-      </template>
-    </div>
-
     <!-- BOTONES DERECHA (solo iconos) -->
-    <div class="flex items-center gap-6 text-teal-600 text-2xl">
+    <div class="flex items-center gap-6 text-[#316168] text-2xl relative">
       <!-- Usuario no autenticado -->
       <template v-if="!currentUser">
-        <RouterLink to="/login">
-          <font-awesome-icon icon="fa-solid fa-right-to-bracket" />
+        <RouterLink to="/login" title="Iniciar sesión">
+          <font-awesome-icon icon="fa-solid fa-right-to-bracket" class="hover:opacity-80 transition" />
         </RouterLink>
-        <RouterLink to="/register">
-          <font-awesome-icon icon="fa-solid fa-user-plus" />
+        <RouterLink to="/register" title="Registrarse">
+          <font-awesome-icon icon="fa-solid fa-user-plus" class="hover:opacity-80 transition" />
         </RouterLink>
       </template>
 
       <!-- Usuario autenticado -->
       <template v-else>
-        <RouterLink to="/perfil">
-          <font-awesome-icon icon="fa-solid fa-user" />
-        </RouterLink>
-        <button @click="logout">
-          <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
+        <!-- Campana de notificaciones -->
+        <button
+          class="align-center justify-center"
+          title="Notificaciones"
+        >
+          <font-awesome-icon icon="fa-solid fa-bell" class="text-[#316168]" />
+          <!-- Indicador de notificaciones -->
+          <span
+            class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white"
+          ></span>
         </button>
+        <!-- Avatar usuario autenticado -->
+        <RouterLink to="/perfil" class="flex items-center justify-center">
+          <div
+            class="w-9 h-9 rounded-full overflow-hidden border border-white/50 shadow-md bg-white/20 backdrop-blur-sm"
+          >
+            <img
+              v-if="currentUser?.avatar"
+              :src="currentUser.avatar"
+              alt="Avatar usuario"
+              class="w-full h-full object-cover"
+            />
+            <div v-else class="w-full h-full bg-gray-300"></div>
+          </div>
+        </RouterLink>
+
+        
       </template>
     </div>
   </header>
 </template>
 
+<style>
+button{
+  font-family: 'Courier New', Courier, monospace;
+}
+</style>

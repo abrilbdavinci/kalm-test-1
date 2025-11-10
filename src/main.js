@@ -17,6 +17,8 @@ import {
   faRightToBracket,
   faUserPlus,
   faArrowRightFromBracket,
+  faBell,
+  faImage
 } from "@fortawesome/free-solid-svg-icons";
 
 // Agregamos los íconos a la librería
@@ -29,7 +31,9 @@ library.add(
   faUser,
   faRightToBracket,
   faUserPlus,
-  faArrowRightFromBracket
+  faArrowRightFromBracket,
+  faBell,
+  faImage
 );
 // === FIN FONT AWESOME ===
 

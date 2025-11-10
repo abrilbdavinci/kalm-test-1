@@ -1,9 +1,10 @@
 <template>
   <section class="w-3xl">
+    <Logo class="mb-5"/>
     <MainTitle>Crear cuenta</MainTitle>
-    <div class="w-full h-130 mx-auto mt-5 p-10 bg-white/40 backdrop-blur-lg rounded-xl shadow-lg">
+    <div class="w-full h-auto mx-auto mt-5 p-10 bg-white/40 backdrop-blur-lg rounded-xl shadow-lg">
 
-      <form @submit.prevent="register" class="flex flex-col gap-3 my-10">
+      <form @submit.prevent="register" class="flex flex-col gap-3">
         <label class="text-start">Nombre</label>
         <input v-model="name" type="text" class="p-2 rounded-full border" required />
 
@@ -20,7 +21,7 @@
       </form>
 
       <p class="mt-4 text-sm text-gray-700">
-        ¿Ya tienes cuenta?
+        ¿Ya tiene cuenta?
         <RouterLink to="/login" class="text-[#37A0AF] font-bold">Ingresar</RouterLink>
       </p>
     </div>
@@ -32,10 +33,11 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import MainTitle from '../components/MainTitle.vue';
 import BtnLight from '../components/BtnLight.vue';
+import Logo from '../components/Logo.vue';
 
 export default {
   name: 'Register',
-  components: { MainTitle, BtnLight },
+  components: { MainTitle, BtnLight, Logo },
   setup() {
     const name = ref('');
     const email = ref('');

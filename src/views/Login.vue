@@ -1,5 +1,6 @@
 <template>
   <section class="w-3xl">
+    <Logo class="mb-5"/>
     <MainTitle>Iniciar sesión</MainTitle>
     <div class="w-full h-auto mx-auto mt-5 p-10 bg-white/40 backdrop-blur-lg rounded-xl shadow-lg">
       <form @submit.prevent="login" class="flex flex-col gap-3">
@@ -29,10 +30,11 @@ import { currentUser } from '../main';
 import { useRouter } from 'vue-router';
 import MainTitle from '../components/MainTitle.vue';
 import BtnLight from '../components/BtnLight.vue';
+import Logo from '../components/Logo.vue';
 
 export default {
   name: 'Login',
-  components: { MainTitle, BtnLight },
+  components: { MainTitle, BtnLight, Logo },
   setup() {
     const email = ref('');
     const password = ref('');

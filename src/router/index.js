@@ -17,7 +17,16 @@ import Buscar from "../views/Buscar.vue";
 
 const authGuard = (to, from, next) => {
   if (!currentUser.value) {
-    next('/login'); // redirige si no hay usuario
+    next('/'); // redirige si no hay usuario
+  } else {
+    next();
+  }
+};
+
+// 🚫 Evita acceder a login/register si ya hay sesión
+const guestGuard = (to, from, next) => {
+  if (currentUser.value) {
+    next('/'); // redirige al Home o al perfil si preferís
   } else {
     next();
   }
@@ -27,8 +36,8 @@ const routes = [
   { path: "/", component: Home , beforeEnter: authGuard},
   { path: "/tests", component: Tests, beforeEnter: authGuard },
   { path: "/tests/:id", component: TestDetail, props: true, beforeEnter: authGuard },
-  { path: "/login", component: Login },
-  { path: "/register", component: Register },
+  { path: "/login", component: Login, beforeEnter: guestGuard },
+  { path: "/register", component: Register, beforeEnter: guestGuard},
   { path: "/about", component: About , beforeEnter: authGuard},
   { path: "/crear-post", component: CrearPost , beforeEnter: authGuard},
   { path: "/contacto", component: Contact , beforeEnter: authGuard},
