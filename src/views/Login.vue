@@ -58,7 +58,7 @@ export default {
         // Actualizar ref reactivo global
         currentUser.value = data.user;
 
-        router.push('/tests'); // Redirigir a tests
+        router.push('/'); // Redirigir a tests
       } catch (err) {
         error.value = err.message;
       }

@@ -10,6 +10,10 @@ import About from "../views/About.vue";
 import Contact from "../views/Contact.vue";
 import Plans from "../views/Plans.vue";
 import Perfil from '../views/Perfil.vue';
+import CrearPost from "../views/CrearPost.vue";
+import Reviews from "../views/Reviews.vue";
+import Blog from "../views/Blog.vue";
+import Buscar from "../views/Buscar.vue";
 
 const authGuard = (to, from, next) => {
   if (!currentUser.value) {
@@ -20,14 +24,18 @@ const authGuard = (to, from, next) => {
 };
 
 const routes = [
-  { path: "/", component: Home },
+  { path: "/", component: Home , beforeEnter: authGuard},
   { path: "/tests", component: Tests, beforeEnter: authGuard },
   { path: "/tests/:id", component: TestDetail, props: true, beforeEnter: authGuard },
   { path: "/login", component: Login },
   { path: "/register", component: Register },
-  { path: "/about", component: About },
-  { path: "/contacto", component: Contact },
-  { path: "/planes", component: Plans },
+  { path: "/about", component: About , beforeEnter: authGuard},
+  { path: "/crear-post", component: CrearPost , beforeEnter: authGuard},
+  { path: "/contacto", component: Contact , beforeEnter: authGuard},
+  { path: "/planes", component: Plans , beforeEnter: authGuard},
+  { path: "/buscar", component: Buscar , beforeEnter: authGuard},
+  { path: "/reviews", component: Reviews , beforeEnter: authGuard},
+  { path: "/blog", component: Blog , beforeEnter: authGuard},
   { path: '/resultado', component: Resultado, props: true, beforeEnter: authGuard },
   { path: '/perfil', name: 'Perfil', component: Perfil, props: true, beforeEnter: authGuard }
 ];

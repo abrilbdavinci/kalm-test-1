@@ -45,49 +45,49 @@ export default {
 
     <!-- ÍCONOS DE NAVEGACIÓN -->
     <div class="flex flex-1 items-center space-x-6 justify-between min-[1061px]:justify-center min-[1061px]:space-x-8">
-      <!-- Inicio -->
+      <!-- Home -->
       <RouterLink
         to="/"
         class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
       >
         <font-awesome-icon icon="fa-solid fa-house" class="text-xl md:mr-2" />
-        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Inicio</span>
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Home</span>
       </RouterLink>
 
-      <!-- Tests -->
+      <!-- Buscar -->
       <RouterLink
-        to="/tests"
+        to="/buscar"
         class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
       >
-        <font-awesome-icon icon="fa-solid fa-vials" class="text-xl md:mr-2" />
-        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Tests</span>
+        <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="text-xl md:mr-2" />
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Buscar</span>
       </RouterLink>
 
-      <!-- Planes -->
+      <!-- Crear Post -->
       <RouterLink
-        to="/planes"
+        to="/crear-post"
         class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
       >
-        <font-awesome-icon icon="fa-solid fa-list-check" class="text-xl md:mr-2" />
-        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Planes</span>
+        <font-awesome-icon icon="fa-solid fa-plus" class="text-xl md:mr-2" />
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Crear Post</span>
       </RouterLink>
 
-      <!-- Sobre -->
+      <!-- Reviews -->
       <RouterLink
-        to="/about"
+        to="/reviews"
         class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
       >
-        <font-awesome-icon icon="fa-solid fa-leaf" class="text-xl md:mr-2" />
-        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Sobre</span>
+        <font-awesome-icon icon="fa-solid fa-users" class="text-xl md:mr-2" />
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Reviews</span>
       </RouterLink>
 
-      <!-- Contacto -->
+      <!-- Blog -->
       <RouterLink
-        to="/contacto"
+        to="/blog"
         class="flex flex-col md:flex-row items-center font-bold text-[#306067]"
       >
-        <font-awesome-icon icon="fa-solid fa-envelope" class="text-xl md:mr-2" />
-        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Contacto</span>
+        <font-awesome-icon icon="fa-solid fa-blog" class="text-xl md:mr-2" />
+        <span class="hidden min-[1061px]:inline-block text-xs md:text-base">Blog</span>
       </RouterLink>
     </div>
 
